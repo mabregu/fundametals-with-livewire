@@ -7,6 +7,9 @@
                 type="text" 
                 placeholder="Título"
             >
+            @error('title')
+                <div class="error">{{ $message }}</div>
+            @enderror
         </label>
 
         <label for="content">

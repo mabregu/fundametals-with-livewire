@@ -10,18 +10,22 @@ class ArticleForm extends Component
     public $title;
     public $content;
 
+    protected $rules = [
+        'title' => 'required|min:3',
+        'content' => 'required|min:3',
+    ];
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function save()
     {
-        $article = new Article();
-
-        $article->title = $this->title;
-        $article->content = $this->content;
-
-        $article->save();
+        Article::create($this->validate());
 
         session()->flash('message', __('Article created successfully.'));
 
-        //$this->reset();
         $this->redirectRoute('articles.index');
     }
 
