@@ -18,12 +18,22 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+
+            label {
+                display: block;
+            }
         </style>
 
         @livewireStyles
     </head>
     <body class="antialiased">
-        {{$slot}}
+        @if(session('message'))
+            <div>
+                {{ session('message') }}
+            </div>
+        @endif
+
+        {{ $slot }}
 
         @livewireScripts
     </body>
